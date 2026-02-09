@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Calculator</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        .container { max-width: 400px; margin: auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
+        input { width: 100%; padding: 8px; margin: 10px 0; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 4px; }
+        button:hover { background-color: #0056b3; }
+        #results { margin-top: 20px; padding-top: 10px; border-top: 2px solid #eee; }
+        .highlight { font-weight: bold; color: #007bff; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Number Processor</h2>
+    <label for="numberInput">Enter a number:</label>
+    <input type="number" id="numberInput" placeholder="e.g. 180">
+    <button onclick="calculate()">Calculate</button>
+
+    <div id="results">
+        </div>
+</div>
+
+<script>
+    function calculate() {
+        const input = document.getElementById('numberInput').value;
+        const resultsDiv = document.getElementById('results');
+        
+        if (input === "") {
+            resultsDiv.innerHTML = "Please enter a number.";
+            return;
+        }
+
+        const num = parseFloat(input);
+        
+        // Step 1: Divide by 18
+        const initialResult = num / 18;
+
+        // Step 2: Multiply that result by 6, 9, and 12
+        const res6 = initialResult * 6;
+        const res9 = initialResult * 9;
+        const res12 = initialResult * 12;
+
+        // Displaying the results
+        resultsDiv.innerHTML = `
+            <p>Divided by 18: <span class="highlight">${initialResult.toFixed(2)}</span></p>
+            <p>Result × <strong>6</strong> = <span class="highlight">${res6.toFixed(2)}</span></p>
+            <p>Result × <strong>9</strong> = <span class="highlight">${res9.toFixed(2)}</span></p>
+            <p>Result × <strong>12</strong> = <span class="highlight">${res12.toFixed(2)}</span></p>
+        `;
+    }
+</script>
+
+</body>
+</html>
